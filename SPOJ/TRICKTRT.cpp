@@ -21,7 +21,8 @@
 #include <memory.h>
 #include <cassert>
 using namespace std;
-
+int dx[8]={-1,-1,-1,0,1,1, 1, 0};
+int dy[8]={-1, 0, 1,1,1,0,-1,-1};
 /*
  -- Valid
  -- const (10^9>sz)
@@ -32,6 +33,7 @@ using namespace std;
  */
 
 const int N=50002;
+const double EPS=1e-9;
 double x[N],y[N];
 int n;
 double dis(double xx,int i){
@@ -54,9 +56,10 @@ int main(){
         double l=20000001;
         double r=-20000001;
         for(int i=0;i<n;i++){
+            scanf("%lf%lf",&x[i],&y[i]);
+
             l=min(l,x[i]);
             r=max(r,x[i]);
-            scanf("%lf%lf",&x[i],&y[i]);
         }
         double ans[2]={r+r,r+r};
         for(int i=0;i<60;i++){
