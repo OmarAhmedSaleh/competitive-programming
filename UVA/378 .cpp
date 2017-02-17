@@ -20,10 +20,19 @@
 #include <ctime>
 #include <memory.h>
 #include <cassert>
-// ss
+#include <complex>
+
 using namespace std;
 int dx[8]={1,-1,0,0,1,-1,1,-1};
 int dy[8]={0,0,-1,1,1,-1,-1,1};
+const double EPS=1e-8;
+//const int N=100005;
+typedef complex<double> point;
+#define X real()
+#define Y imag()
+#define cp(a,b) (conj(a)*(b)).imag()
+#define dp(a,b) (conj(a)*(b)).real()
+#define lengthsq(a)    dp(a,a)
 /*
  -- Valid
  -- const (10^9>sz)
@@ -32,92 +41,69 @@ int dy[8]={0,0,-1,1,1,-1,-1,1};
  -- even or odd
  -- inequality
  */
-
-const int N=500005;
-const double EPS=1e-8;
-struct point{
-    double x,y;
-};
-struct segment{
-    point st,ed;
-};
-struct line{
-    // ax+by+c=0;
-    double a,b,c;
-};
-bool isparallel(line l1, line l2){
-    return fabs(l1.a-l2.a)<EPS && fabs(l1.b-l2.b)<EPS;
+bool l;
+bool check(point a,point c,point d){
+    return a.X>=min(c.X,d.X)&&a.X<=max(c.X,d.X)&&a.Y>=min(c.Y,d.Y)&&a.Y<=max(c.Y,d.Y);
+    ;
 }
-bool areSame(line l1, line l2){
-    return fabs(l1.c-l2.c)<EPS
-    && fabs(l1.a-l2.a)<EPS
-    && fabs(l1.b-l2.b)<EPS;
-}
-void pointsToLine(point p1, point p2,line &l)
+/*
+bool intersectSegments(point a, point b, point c, point d, point & intersect)
 {
-    // l is a vertial line.
-    if (p1.x == p2.x)
-    {
-        l.a = 1.0;
-        l.b = 0;
-        l.c = -p1.x;
-    }
-    else
-    {
-        l.a = -(p1.y - p2.y) / (p1.x - p2.x);
-        l.b = 1.0;
-        l.c = -(l.a * p1.x) - p1.y;
-    }
+    double d1 = cp(a-b, d-c), d2 = cp(a-c, d-c), d3 = cp(a-b, a-c);
+    if(fabs(d1) < EPS) return false; // Parllel || identical
+    double t1 = d2/d1, t2 = d3/d1;
+    intersect = a+(b-a)*t1;
+    if(t2 < -EPS || t2 > 1+EPS)
+        return false;
+    return true;
 }
-point t;
-int isinter(segment a,segment b){
-    line l1,l2;
-    pointsToLine(a.st,a.ed,l1);
-    pointsToLine(b.st,b.ed,l2);
-    if(areSame(l1,l2)){
-        return 2;
-    }
-    if(isparallel(l1,l2)){
-        return 0;
-    }
-    t.x=(l2.b * l1.c - l1.b * l2.c) / (l2.a * l1.b - l1.a * l2.b);
+ */
+bool lineintersect(point a,point b,point c,point d,point &intersect){
+    point ab=b-a;
+    point cd=d-c;
+    point ac=c-a;
+    // c-d Like V , a-b like u, ac like w
+    // t1= cp(v,w)/cp(u,v)
+    // t2=cp(u,w)/cp(u,v)
+    double d1=cp(ab,cd);
+    double d2=cp(ac,cd);
+    //double d3=cp(ab,ac);
     
-    if (fabs(l1.b) > EPS)
-        t.y = -(l1.a * t.x + l1.c);
-    else
-        t.y = -(l2.a * t.x + l2.c);
-    int cnt=0;
-    //if(t.x>=min(a.st.x,a.ed.x)&&t.x<=max(a.st.x,a.ed.x)&&t.y>=min(a.st.y,a.ed.y)&&t.y<=max(a.st.y,a.ed.y)){
-        cnt++;
-   // }
-   // if(t.x>=min(b.st.x,b.ed.x)&&t.x<=max(b.st.x,b.ed.x)&&t.y>=min(b.st.y,b.ed.y)&&t.y<=max(b.st.y,b.ed.y)){
-        cnt++;
-   // }
-    return cnt==2;
+    if(fabs(d1)<EPS){
+        // are parallel
+        l|=fabs(cp(b-a,c-a))<EPS && fabs(cp(b-a,d-a))<EPS;
+        return false;
+    }
+    double t1=d2/d1;
+    intersect=a+((b-a)*t1);
+    return true;
 }
-
+int tt;
 int main(){
-    int tc;
-    scanf("%d",&tc);
-    puts("INTERSECTING LINES OUTPUT");
-    for(int tt=1;tt<=tc;tt++){
-        segment s1,s2;
-        scanf("%lf%lf",&s1.st.x,&s1.st.y);
-        scanf("%lf%lf",&s1.ed.x,&s1.ed.y);
-        scanf("%lf%lf",&s2.st.x,&s2.st.y);
-        scanf("%lf%lf",&s2.ed.x,&s2.ed.y);
-        int ret=isinter(s1,s2);
-        if(ret==2){
-            puts("LINE");
-            continue;
+    scanf("%d",&tt);
+    printf("INTERSECTING LINES OUTPUT\n");
+    while(tt--){
+        vector<point> pts;
+        int x,y;
+        pts.clear();
+        for(int i=0;i<4;i++){
+            scanf("%d %d",&x,&y);
+            pts.push_back(point(x,y));
+            
         }
-        if(ret==0){
-            puts("NONE");
-            continue;
+        point out;
+        l=0;
+        if(lineintersect(pts[0],pts[1],pts[2],pts[3],out)){
+            printf("POINT %.2lf %.2lf\n",out.X,out.Y);
+            
+        }else{
+            if(l){
+                printf("LINE\n");
+            }else{
+                printf("NONE\n");
+            }
         }
-        printf("POINT %.2lf %.2lf\n",t.x,t.y);
-    
     }
-    puts("END OF OUTPUT");
+    printf("END OF OUTPUT\n");
     return 0;//rev Ab steps
 }
