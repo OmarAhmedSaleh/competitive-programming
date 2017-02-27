@@ -1,4 +1,5 @@
 // Rank 5 Time 0.020
+//10040 - Ouroboros Snake
 
 #include <cstring>
 #include <vector>
