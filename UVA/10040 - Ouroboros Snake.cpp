@@ -1,3 +1,5 @@
+// Rank 5 Time 0.020
+
 #include <cstring>
 #include <vector>
 #include <list>
@@ -44,12 +46,15 @@ typedef complex<double> point;
 string s;
 int k ,n,t;
 bool vis[(1<<21)];
+bool cal[22];
+string e[22];
 int main(){
     scanf("%d",&t);
     while(t--){
         scanf("%d%d",&n,&k);
-        memset(vis,0,sizeof(vis));
         s="";
+        if(!cal[n]){
+        memset(vis,0,sizeof(vis));
         for(int i=0;i<n;i++){
             s+='0';
         }
@@ -86,21 +91,22 @@ int main(){
                 s+='1';
                 continue;
             }
-            // If Wrong
-            cout<<n<<" Here"<<endl;
             return 0;
             
         }
         for(int i=0;i<n;i++){
             s+='1';
         }
+        e[n]=s;
+        cal[n]=1;
+        }
         int pos=k;
         string temp="";
         for(int i=0;i<n;i++){
-            if(pos==s.size()){
+            if(pos==e[n].size()){
                 pos=0;
             }
-            temp+=s[pos++];
+            temp+=e[n][pos++];
         }
         int ans=0;
         int p=1;
