@@ -49,6 +49,13 @@ int k ,n,t;
 bool vis[(1<<21)];
 bool cal[22];
 string e[22];
+// at first using complete search function to gereate all possible string and get smallest one
+// where n=2 s=001
+// n=3 s=00010111
+// n=4 s=0000100110101111
+// n=5 s=00000100011001010011101011011111
+// always first (from left) n bits are 0's and from right are 1's
+
 int main(){
     scanf("%d",&t);
     while(t--){
@@ -64,12 +71,12 @@ int main(){
             long long mask=x;
             // only first (from right) n bits are 1
             // greedy (see it by useing conplete search function )
-            // generate strting first n Bits are 0 , and last n are 1
+            // generate strting first n Bits are 0;s , and last n are 1's
             
             for(int i=0;i<n;i++){
-            // mark all number visited (can be produced)
-            // example for n = 3
-            // 111 -> 110 -> 100 -> 000
+                // mark all number visited (can be produced)
+                // example for n = 3
+                // 111 -> 110 -> 100 -> 000
                 
                 vis[x]=1;
                 x<<=1;
@@ -103,42 +110,43 @@ int main(){
                 c2+=1;
                 c1&=mask;
                 c2&=mask;
+                /*
+                 c1<c2
+                 check if you can put 0 first (smallest possible)
+                 in our example if n=3 ,and cur =0
+                 c1=0 (000) , c2 = 1 (001)
+                 c1 is visited
+                 then check c2
+                 out string now is 0001????
                 
-                // c1<c2
-                // check if you can put 0 first (smallest possible)
-                // in our example if n=3 ,and cur =0
-                // c1=0 (000) , c2 = 1 (001)
-                // c1 is visited
-                // then check c2
-                // out string now is 0001????
-             
-                // cur = 1
-                // c1 = 2 (010) c2=3 (011)
-                // c1 is ok
-                // out string 00010???
+                 cur = 1
+                 c1 = 2 (010) c2=3 (011)
+                 c1 is ok
+                 out string 00010???
                 
-                // cur = 2
-                // c1 = 4 (100) c2=7 (111)
-                // c1 is ok
-                // out string 000100??
+                 cur = 2
+                 c1 = 4 (100) c2=7 (111)
+                 c1 is ok
+                 out string 000100??
                 
-                // cur = 4
-                // c1 = 8 (1000) c1> 2 power n -1
-                // then c1&=mask ((1000) & (0111))= 000
-                // c1= 0 (000)
-                // c2 = 9 (1001) c2> 2 power n -1
-                // then c2&=mask ((1001) & (0111))= 001
-                // c2= 1 (001)
-                // c2 is ok
-                // out string 0001001?
+                 cur = 4
+                 c1 = 8 (1000) c1> 2 power n -1
+                 then c1&=mask ((1000) & (0111))= 000
+                 c1= 0 (000)
+                 c2 = 9 (1001) c2> 2 power n -1
+                 then c2&=mask ((1001) & (0111))= 001
+                 c2= 1 (001)
+                c2 is ok
+                out string 0001001?
                 
-                // cur = 1
-                // c1 = 2 (010)
-                // c2 = 3 (011)
-                // c2 is ok
-                // out string 00010011
-            
-                // Done
+                cur = 1
+                c1 = 2 (010)
+                c2 = 3 (011)
+                c2 is ok
+                out string 00010011
+                
+                 Done
+                 */
                 if(!vis[c1]){
                     cur=c1;
                     vis[c1]=1;
@@ -168,6 +176,7 @@ int main(){
             e[n]=s;
             cal[n]=1;
         }
+        cout<<s<<endl;
         // from position k
         int pos=k;
         string temp="";
