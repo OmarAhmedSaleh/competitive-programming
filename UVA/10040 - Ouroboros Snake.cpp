@@ -186,7 +186,7 @@ int main(){
             e[n]=s;
             cal[n]=1;
         }
-        cout<<s<<endl;
+       // cout<<s<<endl;
         // from position k
         int pos=k;
         string temp="";
