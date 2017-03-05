@@ -50,7 +50,7 @@ bool vis[(1<<21)];
 bool cal[22];
 string e[22];
 // at first using complete search function to generate all possible strings and get smallest one
-// where n=2 s=001
+// where n=2 s=0011
 // n=3 s=00010111
 // n=4 s=0000100110101111
 // n=5 s=00000100011001010011101011011111
