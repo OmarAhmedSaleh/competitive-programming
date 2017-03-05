@@ -49,7 +49,7 @@ int k ,n,t;
 bool vis[(1<<21)];
 bool cal[22];
 string e[22];
-// at first using complete search function to gereate all possible string and get smallest one
+// at first using complete search function to generate all possible strings and get smallest one
 // where n=2 s=001
 // n=3 s=00010111
 // n=4 s=0000100110101111
@@ -63,14 +63,16 @@ int main(){
         s="";
         if(!cal[n]){
             memset(vis,0,sizeof(vis));
+            // first n bits are 0's
             for(int i=0;i<n;i++){
                 s+='0';
             }
             long long x=1<<n;
             x--;
             long long mask=x;
+            // for n=3 mask=111
             // only first (from right) n bits are 1
-            // greedy (see it by useing conplete search function )
+            // greedy (see it by useing complete search function )
             // generate strting first n Bits are 0;s , and last n are 1's
             
             for(int i=0;i<n;i++){
@@ -81,9 +83,9 @@ int main(){
                 vis[x]=1;
                 x<<=1;
                 // anding with mask
-                // example if n=2 and x=3 (11) x<<=1 then x=4 (100)
+                // example if n=2 and x=3 (11) x<<=1 then x=6 (110)
                 //i need only first (from right) n bits (mask=011)
-                // after Anding x = 0 (00)
+                // after Anding x = 2 (10)
                 // it is valid now
                 
                 
@@ -93,7 +95,8 @@ int main(){
             int sz=1<<n;
             // string length 2 power n
             sz-=n;
-            // first n bits are 0 (from) left
+            // last n bits are 1's
+            // i will add them after loop
             int cur=0;
             // first number is zero
             // if n = 3
@@ -104,7 +107,7 @@ int main(){
             while((int)s.size()<sz){
                 int c1=cur;
                 int c2=cur;
-                // from cur number , i can move to next by shifting left 1 bit,then adding 0 or 1
+                // from cur number ,can move to next by shifting left 1 bit,then adding 0 or 1
                 c1<<=1;
                 c2<<=1;
                 c2+=1;
@@ -112,38 +115,44 @@ int main(){
                 c2&=mask;
                 /*
                  c1<c2
-                 check if you can put 0 first (smallest possible)
+                 check if you can put 0  (smallest possible)
                  in our example if n=3 ,and cur =0
                  c1=0 (000) , c2 = 1 (001)
-                 c1 is visited
+                 c1 visited
                  then check c2
-                 out string now is 0001????
+                 our string now is 0001????
                 
                  cur = 1
                  c1 = 2 (010) c2=3 (011)
                  c1 is ok
-                 out string 00010???
+                 our string 00010???
+                 
+                 // loop end here
+                 // last 3 bits are 1's
+                 
+                 // but let see why
+                 
+                 cur = 2 (010)
+                 c1 = 4 (100) c2=5 (101)
+                 c1 visited
+                 c2 is ok
+                 our string 000101??
                 
-                 cur = 2
-                 c1 = 4 (100) c2=7 (111)
-                 c1 is ok
-                 out string 000100??
+                 cur = 5 (101)
+                 c1 = 10 (1010) c1> 2 power n -1
+                 then c1&=mask ((1010) & (0111))= 010
+                 c1= 2 (010)
+                 c2 = 11 (1011) c2> 2 power n -1
+                 then c2&=mask ((1011) & (0111))= 011
+                 c2= 3 (011)
+                 c2 is ok
+                 our string 0001011?
                 
-                 cur = 4
-                 c1 = 8 (1000) c1> 2 power n -1
-                 then c1&=mask ((1000) & (0111))= 000
-                 c1= 0 (000)
-                 c2 = 9 (1001) c2> 2 power n -1
-                 then c2&=mask ((1001) & (0111))= 001
-                 c2= 1 (001)
-                c2 is ok
-                out string 0001001?
-                
-                cur = 1
-                c1 = 2 (010)
-                c2 = 3 (011)
-                c2 is ok
-                out string 00010011
+                 cur =3 (011)
+                 c1 = 7 (111)
+                 c2 = 6 (110)
+                 c2 is ok
+                 our string 00010111
                 
                  Done
                  */
@@ -181,11 +190,11 @@ int main(){
         int pos=k;
         string temp="";
         for(int i=0;i<n;i++){
-            // check remeber string is circular
+            // check remember string is circular
             if(pos==e[n].size()){
                 pos=0;
             }
-            // add all bits
+            // add bits
             temp+=e[n][pos++];
         }
         int ans=0;
