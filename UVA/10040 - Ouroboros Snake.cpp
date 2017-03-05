@@ -1,6 +1,3 @@
-// Rank 5 Time 0.020
-//10040 - Ouroboros Snake
-
 #include <cstring>
 #include <vector>
 #include <list>
@@ -45,7 +42,7 @@ typedef complex<double> point;
  -- inequality
  */
 string s;
-int k ,n,t;
+int k ,n,t,c1,c2;
 bool vis[(1<<21)];
 bool cal[22];
 string e[22];
@@ -106,8 +103,8 @@ int main(){
             vis[cur]=1;
             // mark zero
             while((int)s.size()<sz){
-                int c1=cur;
-                int c2=cur;
+                 c1=cur;
+                 c2=cur;
                 // from cur number ,can move to next by shifting left 1 bit,then adding 0 or 1
                 c1<<=1;
                 c2<<=1;
@@ -122,7 +119,7 @@ int main(){
                  c1 visited
                  then check c2
                  our string now is 0001????
-                
+                 
                  cur = 1
                  c1 = 2 (010) c2=3 (011)
                  c1 is ok
@@ -138,7 +135,7 @@ int main(){
                  c1 visited
                  c2 is ok
                  our string 000101??
-                
+                 
                  cur = 5 (101)
                  c1 = 10 (1010) c1> 2 power n -1
                  then c1&=mask ((1010) & (0111))= 010
@@ -148,13 +145,13 @@ int main(){
                  c2= 3 (011)
                  c2 is ok
                  our string 0001011?
-                
+                 
                  cur =3 (011)
                  c1 = 7 (111)
                  c2 = 6 (110)
                  c2 is ok
                  our string 00010111
-                
+                 
                  Done
                  */
                 if(!vis[c1]){
@@ -175,23 +172,24 @@ int main(){
                 return 0;
                 
             }
-            
+            // adding last n bits
+            // 1's
             for(int i=0;i<n;i++){
                 s+='1';
             }
             // save string for n
             // mark for n done
             // if multitest Case with same n , generate string one time only
-            
             e[n]=s;
             cal[n]=1;
         }
-       // cout<<s<<endl;
+        // cout<<s<<endl;
         // from position k
         int pos=k;
         string temp="";
         for(int i=0;i<n;i++){
             // check remember string is circular
+        
             if(pos==e[n].size()){
                 pos=0;
             }
