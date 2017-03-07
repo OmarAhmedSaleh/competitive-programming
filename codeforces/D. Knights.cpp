@@ -88,7 +88,7 @@ int main(){
         cr[i].c=point(xx,yy);
     }
     //  1000 = 50*20
-    // 50 mask * 20 Bits
+    // 50 masks * 20 Bits
     for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
             if(ok(i,j)){
