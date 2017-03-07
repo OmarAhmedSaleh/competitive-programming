@@ -58,15 +58,17 @@ int n,m,k,x[1003],y[1003];
 struct circle{
     point c;
     double r;
-
+    
 };
+int a,b;
+int ans;
 circle cr[1003];
 int mask[1003][55];
 bool ok(int i,int j){
-  // point inside a circle
-     long long xxx=x[i]-cr[j].c.X; xxx*=xxx;
-     long long yyy=y[i]-cr[j].c.Y; yyy*=yyy;
-     return xxx+yyy<1LL*cr[j].r*cr[j].r;
+    // point inside a circle
+    long long xxx=x[i]-cr[j].c.X; xxx*=xxx;
+    long long yyy=y[i]-cr[j].c.Y; yyy*=yyy;
+    return xxx+yyy<1LL*cr[j].r*cr[j].r;
 }
 int cnt(int bin){
     int ret=0;
@@ -75,20 +77,28 @@ int cnt(int bin){
         bin/=2;
     }
     return ret;
-    }
+}
+int xx,rr,yy;
+int cal[1<<20];
 int main(){
     scanf("%d%d%d",&n,&m,&k);
+    int lim=1<<20;
+    lim--;
+  
     for(int i=0;i<n;i++){
         scanf("%d%d",&x[i],&y[i]);
     }
-    int xx,rr,yy;
+  
+    for(int i=0;i<=lim;i++){
+        cal[i]=cnt(i);
+    }
     for(int i=0;i<m;i++){
         scanf("%d%d%d",&rr,&xx,&yy);
         cr[i].r=rr;
         cr[i].c=point(xx,yy);
     }
     //  1000 = 50*20
-    // 50 masks * 20 Bits
+    // 50 mask * 20 Bits
     for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
             if(ok(i,j)){
@@ -96,15 +106,14 @@ int main(){
             }
         }
     }
-    int a,b;
-    int ans;
-
+    
+    
     for(int i=0;i<k;i++){
         ans=0;
         scanf("%d%d",&a,&b);
         a--;b--;
         for(int j=0;j<51;j++){
-            ans+=cnt(mask[a][j]^mask[b][j]);
+            ans+=cal[mask[a][j]^mask[b][j]];
         }
         printf("%d\n",ans);
     }
