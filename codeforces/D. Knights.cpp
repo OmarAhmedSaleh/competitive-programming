@@ -54,7 +54,7 @@ double dgtord(double x){
  -- even or odd
  -- inequality
  */
-int n,m,k,x[1003],y[1003];
+int n,m,k,x[1001],y[1001];
 struct circle{
     point c;
     double r;
@@ -62,8 +62,8 @@ struct circle{
 };
 int a,b;
 int ans;
-circle cr[1003];
-int mask[1003][55];
+circle cr[1001];
+int mask[1001][51];
 bool ok(int i,int j){
     // point inside a circle
     long long xxx=x[i]-cr[j].c.X; xxx*=xxx;
