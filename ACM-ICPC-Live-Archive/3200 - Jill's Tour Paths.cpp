@@ -60,7 +60,7 @@ void bk(int idx,int cur){
         }
         
     }
-
+    
 }
 
 
@@ -69,9 +69,9 @@ int tt;
 
 
 int main(){
-   
-
-        while(scanf("%d",&n)==1){
+    
+    
+    while(scanf("%d",&n)==1){
         if(n==-1){
             break;
         }
@@ -89,27 +89,19 @@ int main(){
             e[a].push_back(make_pair(b,c));
             e[b].push_back(make_pair(a,c));
         }
-                scanf("%d%d",&s,&d);
-                scanf("%d",&mx);
-                memset(vis,0,sizeof(vis));
-                vis[s]=1;
-                vv.clear();
-                vv.push_back(s);
-                bk(s,0);
-            printf("Case %d:\n",++tt);
-            set<pair<int,vector<int> > > st;
+        scanf("%d%d",&s,&d);
+        scanf("%d",&mx);
+        memset(vis,0,sizeof(vis));
+        vis[s]=1;
+        vv.clear();
+        vv.push_back(s);
+        bk(s,0);
+        printf("Case %d:\n",++tt);
+        set<pair<int,vector<int> > > st;
         if(all.size()==0){
             cout<<" NO ACCEPTABLE TOURS"<<endl;
         }else{
-            for(int i=0;i<all.size();i++){
-                st.insert(all[i]);
-            }
-            all.clear();
-            set<pair<int,vector<int> > > ::iterator it=st.begin();
-            while(it!=st.end()){
-                all.push_back(*it);
-                            it++;
-            }
+            sort(all.begin(),all.end());
             for(int i=0;i<all.size();i++){
                 st.insert(all[i]);
                 printf(" %d%c ",all[i].first,':');
