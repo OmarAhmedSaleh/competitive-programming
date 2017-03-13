@@ -49,6 +49,7 @@ void dfs(int idx,int v){
 
     eu.push_back(idx);
 }
+// reset edges
 void rem(){
     int to;
     for(int idx=1;idx<=n;idx++){
@@ -61,6 +62,7 @@ void rem(){
     
     }
 }
+// return 1 if you can take all egdes 
 bool done(){
     int to;
     for(int idx=1;idx<=n;idx++){
@@ -74,6 +76,7 @@ bool done(){
 }
 int main(){
     scanf("%d%d",&n,&m);
+ // graph
     for(int i=0;i<=m;i++){
         scanf("%d",&p[i]);
         if(i){
@@ -82,12 +85,16 @@ int main(){
             cnt[p[i]][p[i-1]]=cnt[p[i-1]][p[i]]=1;
         }
     }
+ // sort to get smallest
     for(int i=1;i<=n;i++){
         sort(e[i].begin(),e[i].end());
     }
     vector<int> out;
+ // try to change (right - left)
     for(int i=m;i>0;i--){
-        out.clear();eu.clear();
+        out.clear();
+     eu.clear();
+    
         cnt[p[i - 1]][p[i]] = cnt[p[i]][p[i - 1]] = 0;
         dfs(p[i-1],p[i]);
         if(done()){
