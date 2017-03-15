@@ -26,9 +26,9 @@
  
  
  
- finally state is equal to 
+ finally probability of state is equal to 
  
- p(r,s,k)=prob*(crs * p(r,s-1,k) + crk * (r-1,s,k) + csk * (r,s,k-1)) / ( 1 - prob * ( cr + cs+ ck ))
+ p(r,s,k)=prob*( crs * p(r,s-1,k) + crk * (r-1,s,k) + csk * (r,s,k-1) ) / ( 1 - prob * ( cr + cs+ ck ))
  
  */
 #include <cstring>
