@@ -20,7 +20,7 @@
  
     -----------------------------------------------------------------------------------
  
- probability of each state :
+ probability of state :
  
  p(r,s,k)= p(pair(r,r)) + p(pair(r,k)) + p(pair(s,s)) + p(pair(s,k)) + p(pair(k,k))
  
