@@ -1,3 +1,6 @@
+/* 
+find intersections point or check if the line is inside the rectangle
+*/
 #include <cstring>
 #include <vector>
 #include <list>
@@ -20,10 +23,35 @@
 #include <ctime>
 #include <memory.h>
 #include <cassert>
-// ss
+#include <complex>
+
 using namespace std;
 int dx[8]={1,-1,0,0,1,-1,1,-1};
 int dy[8]={0,0,-1,1,1,-1,-1,1};
+
+const double EPS=1e-8;
+
+typedef complex<double> point;
+const double PI=acos(-1);
+#define X real()
+#define Y imag()
+#define angle(a)                (atan2((a).imag(), (a).real()))
+#define vec(a,b)                ((b)-(a))
+#define same(p1,p2)             (dp(vec(p1,p2),vec(p1,p2)) < EPS)
+#define dp(a,b)                 ( (conj(a)*(b)).real() )	// a*b cos(T), if zero -> prep
+#define cp(a,b)                 ( (conj(a)*(b)).imag() )	// a*b sin(T), if zero -> parllel
+#define length(a)               (hypot((a).imag(), (a).real()))
+#define normalize(a)            (a)/length(a)
+//#define polar(r,ang)            ((r)*exp(point(0,ang)))  ==> Already added in c++11
+#define rotateO(p,ang)          ((p)*exp(point(0,ang)))
+#define rotateA(p,ang,about)  (rotateO(vec(about,p),ang)+about)
+#define reflectO(v,m)  (conj((v)/(m))*(m))
+
+double dgtord(double x){
+    return (x/180)*PI;
+}
+
+
 /*
  -- Valid
  -- const (10^9>sz)
@@ -33,124 +61,72 @@ int dy[8]={0,0,-1,1,1,-1,-1,1};
  -- inequality
  */
 
-const int N=500005;
-const double EPS=1e-9;
-struct point{
-    double x,y;
-   
-};
-struct line{
-    double a,b,c;
-};
-void pointsToLine(point p1, point p2,line &l)
-{
-    // l is a vertial line.
-    if (p1.x == p2.x)
-    {
-        l.a = 1.0;
-        l.b = 0;
-        l.c = -p1.x;
-    }
-    else
-    {
-        l.a = -(p1.y - p2.y) / (p1.x - p2.x);
-        l.b = 1.0;
-        l.c = -(l.a * p1.x) - p1.y;
-    }
-}
-bool aresame(line l1,line l2){
-    return fabs(l1.a-l2.a)<EPS &&fabs(l1.b-l2.b)<EPS&&fabs(l1.c-l2.c)<EPS;
-}
-bool ispar(line l1,line l2){
-    return fabs(l1.a-l2.a)<EPS &&fabs(l1.b-l2.b)<EPS;
-}
-struct seg{
-    point st,ed;
-};
+
 int tc;
-bool isinter(seg a,seg b){
-    line l1,l2;
-    pointsToLine(a.st,a.ed,l1);
-    pointsToLine(b.st,b.ed,l2);
-    if(ispar(l1,l2)){
-        return 0;
-    }
-    point t;
-    t.x=(l2.b * l1.c - l1.b * l2.c) / (l2.a * l1.b - l1.a * l2.b);
-   
-    if (fabs(l1.b) > EPS)
-        t.y = -(l1.a * t.x + l1.c);
-    else
-        t.y = -(l2.a * t.x + l2.c);
-    int cnt=0;
-    if(t.x>=min(a.st.x,a.ed.x)&&t.x<=max(a.st.x,a.ed.x)&&t.y>=min(a.st.y,a.ed.y)&&t.y<=max(a.st.y,a.ed.y)){
-        cnt++;
-    }
-    if(t.x>=min(b.st.x,b.ed.x)&&t.x<=max(b.st.x,b.ed.x)&&t.y>=min(b.st.y,b.ed.y)&&t.y<=max(b.st.y,b.ed.y)){
-        cnt++;
-    }
-    //cout<<a.st.x<<" "<<a.st.y<<" "<<a.ed.x<<" "<<a.ed.y<<endl;
-   // cout<<b.st.x<<" "<<b.st.y<<" "<<b.ed.x<<" "<<b.ed.y<<endl;
+
+double x,y;
+
+point line[2],rec[4];
+
+bool intersectSegments(point a, point b, point c, point d, point & intersect) {
+    double d1 = cp(a - b, d - c), d2 = cp(a - c, d - c), d3 = cp(a - b, a - c);
+    if (fabs(d1) < EPS)
+        return false;
     
-    //cout<<t.x<<" "<<t.y<<endl;
-    //cout<<cnt<<endl;
-    return cnt==2;
-}
-string out="FT";
-bool isInsideRectangle(point p1, point p2, point p3)
-{
-    if (p3.x <= max(p1.x, p2.x)
-        && p3.x >= min(p1.x, p2.x)
-        && p3.y <= max(p1.y, p2.y)
-        && p3.y >= min(p1.y, p2.y))
-        return true;
+    double t1 = d2 / d1, t2 = d3 / d1;
+    intersect = a + (b - a) * t1;
     
-    return false;
+    if (t1 < -EPS || t2 < -EPS || t2 > 1 + EPS||t1> 1 + EPS)
+        return false;
+    
+    return true;
 }
+
 int main(){
     scanf("%d",&tc);
-    for(int tt=1;tt<=tc;tt++){
-    seg s;
-    scanf("%lf%lf%lf%lf",&s.st.x,&s.st.y,&s.ed.x,&s.ed.y);
-    double ux,uy,lx,ly;
-    scanf("%lf%lf%lf%lf",&ux,&uy,&lx,&ly);
-    vector<seg> rec;
-    seg d;
-    d.st.x=ux;
-    d.st.y=uy;
-    d.ed.x=ux;
-    d.ed.y=ly;
-    rec.push_back(d);
-    d.st.x=lx;
-    d.st.y=uy;
-    d.ed.x=lx;
-    d.ed.y=ly;
-    rec.push_back(d);
-    d.st.x=ux;
-    d.st.y=ly;
-    d.ed.x=lx;
-    d.ed.y=ly;
-    rec.push_back(d);
-    d.st.x=ux;
-    d.st.y=uy;
-    d.ed.x=lx;
-    d.ed.y=uy;
-    rec.push_back(d);
-        point up;
-        up.x=ux;
-        up.y=uy;
-        point lo;
-        lo.x=lx;
-        lo.y=ly;
-        int ok=0;
-        for(int i=0;i<rec.size();i++){
-            if(isinter(s,rec[i])||isInsideRectangle(up,lo,s.st)||isInsideRectangle(up,lo,s.ed)){
-                ok=1;
-            }
-            
+    while(tc--){
+        scanf("%lf%lf",&x,&y);
+        line[0]=point(x,y);
+        scanf("%lf%lf",&x,&y);
+        line[1]=point(x,y);
+        
+        scanf("%lf%lf",&x,&y);
+        rec[0]=point(x,y);
+        
+        scanf("%lf%lf",&x,&y);
+        rec[1]=point(x,y);
+        
+        rec[2]=point(rec[0].X,rec[1].Y);
+        
+        rec[3]=point(rec[1].X,rec[0].Y);
+        bool ok=0;
+        point ret;
+        ok|=intersectSegments(line[0],line[1],rec[0],rec[2],ret);
+        ok|=intersectSegments(line[0],line[1],rec[0],rec[3],ret);
+        ok|=intersectSegments(line[0],line[1],rec[1],rec[2],ret);
+        ok|=intersectSegments(line[0],line[1],rec[1],rec[3],ret);
+
+        double xx[2],yy[2];
+        xx[0]=xx[1]=rec[0].X;
+        yy[0]=yy[1]=rec[0].Y;
+        for(int i=0;i<4;i++){
+            xx[0]=min(rec[i].X,xx[0]);
+            xx[1]=max(rec[i].X,xx[1]);
+            yy[0]=min(rec[i].Y,yy[0]);
+            yy[1]=max(rec[i].Y,yy[1]);
         }
-        cout<<out[ok]<<endl;
-    
+        
+        ok|=(!(line[0].X < xx[0]) && !(line[0].X > xx[1]) && !(line[0].Y < yy[0]) && !(line[0].Y > yy[1]));
+        
+        ok|=(!(line[1].X < xx[0]) && !(line[1].X > xx[1]) && !(line[1].Y < yy[0]) && !(line[1].Y > yy[1]));
+
+        if(ok){
+            puts("T");
+        }else{
+            puts("F");
+
+        }
+        
     }
     return 0;//rev Ab steps
 }
