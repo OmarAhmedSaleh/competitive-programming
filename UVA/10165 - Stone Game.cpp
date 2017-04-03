@@ -1,7 +1,3 @@
-
-/*
- try all possible cuts , find area of two polygons
- */
 #include <cstring>
 #include <vector>
 #include <list>
