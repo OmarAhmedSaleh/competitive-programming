@@ -111,7 +111,26 @@ pair<vector<point>, vector<point> > polygonCut(vector<point> &p,point A, point B
 point mid(point a,point b){
     return point((a.X+b.X)/2.0,(b.Y+a.Y)/2.0);
 }
+double mn=1e30;
+double ans[2]={-1,-1};
+double area[2];
+void cal(vector<point> &aa,vector<point> &bb){
+    pair<vector<point> ,vector<point> > ret;
+    for(int i=0;i<aa.size();i++){
+        for(int j=0;j<bb.size();j++){
+            if(i==j){continue;}
+            ret=polygonCut(pts,aa[i],bb[j]);
+            area[0]=fabs(polygonArea(ret.first));
+            area[1]=fabs(polygonArea(ret.second));
+            if(fabs(area[0]-area[1])<mn){
+                mn=fabs(area[0]-area[1]);
+                ans[0]=area[0];ans[1]=area[1];
+            }
+        }
+    }
 
+
+}
 int tt=1;
 int main(){
     while(1){
@@ -126,48 +145,14 @@ int main(){
         if(bk){
             break;
         }
-        double mn=1e30;
-        double ans[2]={-1,-1};
-        double area[2];
+        mn=1e30;
         vector<point> allmid;
         for(int i=0;i<4;i++){
             allmid.push_back(mid(pts[i],pts[(i+1)%4]));
         }
-        pair<vector<point> ,vector<point> > ret;
-        for(int i=0;i<pts.size();i++){
-            for(int j=i+1;j<pts.size();j++){
-                ret=polygonCut(pts,pts[i],pts[j]);
-                area[0]=fabs(polygonArea(ret.first));
-                area[1]=fabs(polygonArea(ret.second));
-                if(fabs(area[0]-area[1])<mn){
-                    mn=fabs(area[0]-area[1]);
-                    ans[0]=area[0];ans[1]=area[1];
-                }
-            }
-        }
-        for(int i=0;i<pts.size();i++){
-            for(int j=0;j<allmid.size();j++){
-                ret=polygonCut(pts,pts[i],allmid[j]);
-                area[0]=fabs(polygonArea(ret.first));
-                area[1]=fabs(polygonArea(ret.second));
-                if(fabs(area[0]-area[1])<mn){
-                    mn=fabs(area[0]-area[1]);
-                    ans[0]=area[0];ans[1]=area[1];
-                }
-            }
-        }
-       
-        for(int i=0;i<allmid.size();i++){
-            for(int j=i+1;j<allmid.size();j++){
-                ret=polygonCut(pts,allmid[i],allmid[j]);
-                area[0]=fabs(polygonArea(ret.first));
-                area[1]=fabs(polygonArea(ret.second));
-                if(fabs(area[0]-area[1])<mn){
-                    mn=fabs(area[0]-area[1]);
-                    ans[0]=area[0];ans[1]=area[1];
-                }
-            }
-        }
+        cal(pts,allmid);
+        cal(pts,pts);
+        cal(allmid,allmid);
         printf("Cake %d: %.3lf %.3lf\n",tt++,min(ans[0],ans[1]),max(ans[0],ans[1]));
         
     }
