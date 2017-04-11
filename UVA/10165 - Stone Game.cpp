@@ -1,3 +1,7 @@
+/*
+it is about nim game (standard Idea)
+using Xor sum strategy to determine if first player can win (Xor==0) or lose (Xor>0)
+*/
 #include <cstring>
 #include <vector>
 #include <list>
