@@ -1,8 +1,39 @@
 
-/*
-find shortest path 
-*/
 
+
+/*
+Build :
+you can see triangle like layer graph 
+i'th layer contains i node(s)
+
+node (i,j) connect with node(i+1,j-1) , node(i+1,j+1)
+and all nodes at its level 
+
+calculate the distance between each pair (node i, node j) using BFS
+
+           (1,j)
+           /   \
+    (2,j-1)-----(2,j+1)
+    /     \    /   \
+(3,j-2)----(3,j)----(3,j+2)
+
+————————————————————————————————————————————————————
+check:
+let node 1 ,2 ,3 = char ‘A’
+
+they form the vertices of an equilateral triangle 
+
+if dis(node1,node2)==dis(node 1, node 3)==node(node 2 , node 3)
+————————————————————————————————————————————————————
+i think you can solve this problem with very simple idea 
+
+just calculate distance using this function:
+
+int dist(const int &x1, const int &y1, const int &x2, const int &y2){
+return ((x1-x2)*(x1-x2)*3+(y1-y2)*(y1-y2));
+}
+
+*/
 
 #include <cstring>
 #include <vector>
