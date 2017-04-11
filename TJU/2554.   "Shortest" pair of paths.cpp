@@ -1,3 +1,20 @@
+
+/*
+here you have a Graph you want to find two separate paths  from source node to Target node, and want to minimize Cost of Paths
+(A) Are you Sure that you can find 2 paths ? to do this you can use Max Flow algorithm
+(B) Min Cost !!!??? 
+
+Max flow algorithm “edmonds karp”  Steps
+(1) try to get path from source to target node (using BFS)
+(2) get min capacity along this path ( bottleneck)
+
+- i need path that has min cost, not any path else
+- ok, i will use Bellman ford to compute shortest path between s->t 
+- then apply step (2)
+
+Flow_cost= min_Cap*Path_Cost
+
+*/
 #include <cstring>
 #include <vector>
 #include <list>
