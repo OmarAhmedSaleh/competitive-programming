@@ -1,3 +1,18 @@
+
+/*
+you can see the number of withe tiles between two Black tiles , like number of stones at Piles (in Nim Game)
+calculate all Piles (number of withe tiles between two Black tiles)
+Don’t Forget (first position and first black tiles ) ( last and last)
+ 
+solve like simple Nim Game Problem Xor all values 
+if(Xor==0){
+second players  //  "Rabbit";
+
+}else{
+first player
+// Cat
+}
+*/
 #include <cstring>
 #include <vector>
 #include <list>
