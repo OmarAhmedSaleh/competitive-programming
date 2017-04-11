@@ -1,3 +1,43 @@
+
+/*
+first player sort items in decreasing order and take item (left->right)
+second player (you) , want to take item ( first player didn’t take it) 
+
+you want to maximise possible sum regardless of the first player’s moves?
+
+{
+WA approach “take max item ”
+test case
+4
+a[]=9 8 7 6
+b[]=1 3 1 5
+first player take first item a[0]=9 
+a[]=-1 8 7 6
+b[]=-1 3 1 5
+you take item b[3]= 5  cur=5;
+a[]=-1 8 7 -1
+b[]=-1 3 1 -1
+first player take a[1]=8
+you take b[2]=1 cur=5+1
+output : 6
+correct output: 8
+first player take item = a[0]
+you b[1]=3
+first player a[2]=7
+you b[3]=5
+
+
+}
+
+AC approach is :
+
+start from i=1;
+
+if you want to take i’th item you should leave (i+1)’th 
+
+if you want to take i and i+1 you should leave the smallest value you took before
+
+*/
 #include <cstring>
 #include <vector>
 #include <list>
