@@ -1,3 +1,16 @@
+
+/*
+here you want to decompose string P into substrings such that each one is a prefix of string T
+
+i will use KMP algorithm to calculate at each index the longest proper prefix (T) equal to suffix (P)
+
+try to build string from the right to the left
+start with cur=P.size()-1;
+cur=(cur-longest_prefix_at[cur]);
+if (longest proper prefix at cur position == 0 ) it means that it is Impossible to decompose string P , Stop
+stop when cur < 0
+
+*/
 #include <cstring>
 #include <vector>
 #include <list>
