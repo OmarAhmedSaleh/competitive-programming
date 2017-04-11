@@ -1,3 +1,14 @@
+/*
+you have two chooses :
+(A) play again
+(B) stop the game (return 0);
+
+// Value can be Negative
+
+you want to maximize the expected value,
+so at every step you take max(A,B)
+
+*/
 #include <cstring>
 #include <vector>
 #include <list>
