@@ -98,30 +98,28 @@ int main(){
         sz=(int)s.size();
         
         memset(d,-1,sizeof(d));
-      // Dijkstra ,shortest path
-        priority_queue<pair<pair<int,int>,pair<int,int> > > pq;
-        pq.push(make_pair(make_pair(0,0),make_pair(0,0)));
+      // BFS ,shortest path
+        queue<pair<pair<int,int>,pair<int,int> > > q;
+        q.push(make_pair(make_pair(0,0),make_pair(0,0)));
         d[0][0][0]=0;
         // (cost,idx),(x,y)
-        bool b=0;
-        while(!pq.empty()){
-            int c=-pq.top().first.first;
-            int idx=pq.top().first.second;
-            int xx=pq.top().second.first;
-            int yy=pq.top().second.second;
-            pq.pop();
+        while(!q.empty()){
+            int c=q.front().first.first;
+            int idx=q.front().first.second;
+            int xx=q.front().second.first;
+            int yy=q.front().second.second;
+            q.pop();
             if(d[idx][xx][yy]<c){
                 continue;
             }
             if(idx==sz){
-                b=1;
                 printf("%d\n",c);
                 break;
             }
             if(g[xx][yy]==s[idx]){
                 if(d[idx+1][xx][yy]==-1||d[idx+1][xx][yy]>c+1){
                     d[idx+1][xx][yy]=c+1;
-                    pq.push(make_pair(make_pair(-(c+1),idx+1),make_pair(xx,yy)));
+                    q.push(make_pair(make_pair((c+1),idx+1),make_pair(xx,yy)));
                 }
             }
             for(int i=0;i<4;i++){
@@ -133,7 +131,7 @@ int main(){
                 int dd=(g[new_x][new_y]==s[idx]);
                 if(d[idx+dd][new_x][new_y]==-1||d[idx+dd][new_x][new_y]>c+dd+1){
                     d[idx+dd][new_x][new_y]=c+dd+1;
-                    pq.push(make_pair(make_pair(-(c+dd+1),idx+dd),make_pair(new_x,new_y)));
+                    q.push(make_pair(make_pair((c+dd+1),idx+dd),make_pair(new_x,new_y)));
                 }
             }
         }
