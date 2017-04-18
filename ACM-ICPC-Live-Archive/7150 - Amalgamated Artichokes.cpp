@@ -1,3 +1,6 @@
+/*
+keep max value from 1 to i 
+*/
 #include <cstring>
 #include <vector>
 #include <list>
