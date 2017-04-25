@@ -1,3 +1,11 @@
+/*
+ all the different hieroglyphic shapes contain a different number of “holes”.
+ find the connected regions of the picture and then, for every
+ black region R, count how many different white regions are adjacent to R (making sure to
+ pad the entire picture with a white frame to make the outer region one single region).
+
+ */
+
 #include <cstring>
 #include <vector>
 #include <list>
@@ -32,17 +40,17 @@ bool vis[201][201],bad[201*201];
 set<int> all[201*201];
 
 bool valid(int xx,int yy){
-    return xx>-1&&yy>-1&&xx<h&&yy<(int)g[0].size();
+    return xx>-1&&yy>-1&&xx<h&&yy<w;
 }
 
 void dfsb(int xx,int yy){
     mark[1][xx][yy]=cc;
     vis[xx][yy]=1;
     for(int i=0;i<4;i++){
-        int xxx=dx[i]+xx;
-        int yyy=dy[i]+yy;
-        if(valid(xxx,yyy)&&g[xxx][yyy]&&!vis[xxx][yyy]){
-            dfsb(xxx,yyy);
+        int new_x=dx[i]+xx;
+        int new_y=dy[i]+yy;
+        if(valid(new_x,new_y)&&g[new_x][new_y]&&!vis[new_x][new_y]){
+            dfsb(new_x,new_y);
         }
     }
 }
@@ -50,22 +58,22 @@ void dfsw(int xx,int yy){
     mark[0][xx][yy]=cc;
     vis[xx][yy]=1;
     for(int i=0;i<4;i++){
-        int xxx=dx[i]+xx;
-        int yyy=dy[i]+yy;
-        if(!valid(xxx,yyy)){
+        int new_x=dx[i]+xx;
+        int new_y=dy[i]+yy;
+        if(!valid(new_x,new_y)){
             bad[mark[0][xx][yy]]=1;
         }else{
-            if(!vis[xxx][yyy]){
-                if(!g[xxx][yyy]){
-                    dfsw(xxx,yyy);
+            if(!vis[new_x][new_y]){
+                if(!g[new_x][new_y]){
+                    dfsw(new_x,new_y);
                 }else{
-                    all[mark[1][xxx][yyy]].insert(mark[0][xx][yy]);
+                    all[mark[1][new_x][new_y]].insert(mark[0][xx][yy]);
                 }
             }
         }
     }
 }
-string ss="WAKJSD";
+string ss="WAKJSD",s;
 
 int main(){
     mp['0']="0000";
@@ -96,24 +104,25 @@ int main(){
             g[i].clear();
             for(int j=0;j<w;j++){
                 cin>>c;
-                string s=mp[c];
-                for(int k=0;k<s.size();k++){
+                 s=mp[c];
+                for(int k=0;k<(int)s.size();k++){
                     g[i].push_back(s[k]-'0');
                 }
             }
         }
+        w*=4;
         memset(vis,0,sizeof(vis));
         memset(mark,0,sizeof(mark));
         memset(bad,0,sizeof(bad));
         int pos=0;
         for(int i=0;i<=h;i++){
-            for(int j=0;j<=g[0].size();j++){
+            for(int j=0;j<=w;j++){
                 all[pos++].clear();
             }
         }
         cc=0;
         for(int i=0;i<h;i++){
-            for(int j=0;j<g[0].size();j++){
+            for(int j=0;j<w;j++){
                 if(!vis[i][j]&&g[i][j]){
                     cc++;
                     dfsb(i,j);
@@ -124,7 +133,7 @@ int main(){
         memset(vis,0,sizeof(vis));
         cc=0;
         for(int i=0;i<h;i++){
-            for(int j=0;j<g[0].size();j++){
+            for(int j=0;j<w;j++){
                 if(!vis[i][j]&&!g[i][j]){
                     cc++;
                     dfsw(i,j);
