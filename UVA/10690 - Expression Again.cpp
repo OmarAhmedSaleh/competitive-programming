@@ -39,10 +39,11 @@ int n , m ,a[101],sum;
 int memo2[101][5002][51];
 int sz;
 int solve2(int idx,int s1,int k){
+    if(!k){
+        return memo2[idx][s1][k]=1;
+    }
     if(idx==sz){
-        if(!k){
-            return memo2[idx][s1][k]=1;
-        }
+        
         return memo2[idx][s1][k]=0;
     }
     if( memo2[idx][s1][k]!=-1){
