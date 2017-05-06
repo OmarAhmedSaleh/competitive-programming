@@ -38,8 +38,6 @@ int findp(int idx){
     }
     return p[idx]=findp(p[idx]);
 }
-
-
 int main(){
   //  freopen("in.txt","r",stdin);
    // freopen("out.txt","w",stdout);
@@ -64,7 +62,6 @@ int main(){
         for(int i=0;i<=sz;i++){
             p[i]=i;
         }
-        
         int x,y;
         for(int i=0;i<sz;i++){
             x=all[i].first;
