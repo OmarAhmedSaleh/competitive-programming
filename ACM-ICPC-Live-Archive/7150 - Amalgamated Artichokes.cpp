@@ -1,5 +1,8 @@
 /*
-keep max value from 1 to i 
+go through the points in increasing order,
+keeping track of the maximum seen so far.
+When processing a new value, 
+compare its difference to the maximum seen so far and save this difference if it is the largest seen so far
 */
 #include <cstring>
 #include <vector>
