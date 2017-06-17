@@ -29,13 +29,36 @@ int dy[8]={0,0,-1,1,1,-1,-1,1};
 class CityLink{
 public:
     int p[55];
+    vector<pair<int,pair<int,int> > >edges;
     int get(int idx){
         if(p[idx]==idx){return idx;}
         return p[idx]=get(p[idx]);
     }
+    
+    int kruskal(){
+        int ret=0;
+        for(int i=0;i<55;i++){
+            p[i]=i;
+        }
+        // if X.size()==1 -> edges.size() == 0 , Run Time Error
+        if(edges.size()){
+            sort(edges.begin(),edges.end());
+        }
+        int a,b;
+        for(int i=0;i<(int)edges.size();i++){
+            a=get(edges[i].second.first);
+            b=get(edges[i].second.second);
+            if(a!=b){
+                p[a]=b;
+                // ans = the largest cost in MST
+                ret=max(ret,edges[i].first);
+            }
+        }
+        return ret;
+    }
+    
     int timeTaken(vector <int> x, vector <int> y){
-        int ret=0,c=0;
-        vector<pair<int,pair<int,int> > >edges;
+        int c=0;
         // calculate the cost to connect city i and city j
         for(int i=0;i<(int)x.size();i++){
             for(int j=i+1;j<(int)x.size();j++){
@@ -51,24 +74,6 @@ public:
                 edges.push_back(make_pair(c,make_pair(i,j)));
             }
         }
-        // Kruskal Algorithm
-        for(int i=0;i<(int)x.size();i++){
-            p[i]=i;
-        }
-        // if X.size()==1 -> edges.size() == 0 , RTE
-        if(edges.size()){
-            sort(edges.begin(),edges.end());
-        }
-        int a,b;
-        for(int i=0;i<(int)edges.size();i++){
-            a=get(edges[i].second.first);
-            b=get(edges[i].second.second);
-            if(a!=b){
-                p[a]=b;
-                // ans = the largest edge in MST
-                ret=max(ret,edges[i].first);
-            }
-        }
-        return ret;
+               return kruskal();
     }
 };
