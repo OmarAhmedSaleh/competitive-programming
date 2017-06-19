@@ -1,9 +1,9 @@
 /*
  steps:
- 1- we can see that Memory cluster ai as subset of bits
+ 1- we can see Memory cluster ai  subset of bits
  2- for each array with size 2^bi find (bit >=bi)
     - if there is bit == bi , then remove it and ans++;
-    - if there is bit > bi , remove it and add new memory cluser = 2^bit - 2^bi (rep step 1)
+    - if there is bit > bi , remove it and add new memory cluser = 2^bit - 2^bi (rep step 1) ans++;
  */
 
 #include <cstring>
