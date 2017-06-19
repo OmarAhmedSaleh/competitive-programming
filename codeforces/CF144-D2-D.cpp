@@ -1,3 +1,10 @@
+/*
+ steps:
+ 1-at first find shortest path from node 0 to Node I
+ 2-cases
+    (A) if dis[i]==L
+    (B) if dis[i]<L and there is Edge with weight W , dis[i]+w > L
+ */
 #include <cstring>
 #include <vector>
 #include <list>
@@ -65,7 +72,7 @@ int main(){
                 dis[to]=dd+e[idx][i].first;
                 pq.push(make_pair(-dis[to],to));
             }
-        
+            
         }
     }
     int ans=0;
@@ -85,7 +92,7 @@ int main(){
             st.insert(make_pair(make_pair(min(i,e[i][j].second),max(i,e[i][j].second)),mm));
         }
     }
-   
+    
     //cout<<endl;
     printf("%d\n",ans+(int)st.size());
     return 0;
