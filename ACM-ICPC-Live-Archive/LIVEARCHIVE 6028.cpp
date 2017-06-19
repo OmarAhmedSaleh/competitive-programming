@@ -105,8 +105,8 @@ int main(){
                     if(!((k&(1<<j)))){continue;}
                     for(int idx=0;idx<n;idx++){
                         if(!(k&(1<<idx))){
-                            // i=0 , start at 0 end at idx
-                            // i=1 , srart at n-1 end at idx
+                            // i=0 , start from 0 end at idx
+                            // i=1 , srart from n-1 end at idx
                             dp[i][idx][k|(1<<idx)]=min(dp[i][idx][k|(1<<idx)],dp[i][j][k]+dis[j][idx]);
                         }
                     }
@@ -132,14 +132,14 @@ int main(){
                     if(!(mask&(1<<j))){
                         continue;
                     }
-                    // start at 0 end at j , start at j  end at n-1
+                    // start from 0 end at j , start at j  end at n-1
                     a=min(a,dp[0][j][mask|1]+solve(1,j,(mask|1)|(1<<(n-1))));
                 }
                 for(int j=1;j<n-1;j++){
                     if(!(mask&(1<<j))){
                         continue;
                     }
-                    // start at n-1 end at j , start at j end at 0
+                    // start from n-1 end at j , start from j end at 0
                     b=min(b,dp[1][j][mask|(1<<(n-1))]+solve(0,j,(mask|1)|(1<<(n-1))));
                 }
                 best=min(best,a+b);
