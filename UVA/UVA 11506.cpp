@@ -37,7 +37,7 @@ void addedge(int i ,int j , int c){
 }
 int dis[111], work[111];
 int dfs(int idx,int mn){
-    if(idx==m-1+50){
+    if(idx==m+49){
         return mn;
     }
     for(int &i=work[idx];i<e[idx].size();i++){
@@ -80,7 +80,7 @@ int main(){
             addedge(id,id+50,dc);
         }
         addedge(0,50,1e9);
-        addedge(m-1,m-1+50,1e9);
+        addedge(m-1,m+49,1e9);
         
         int u,v,d;
         for(int i=0;i<w;i++){
@@ -102,7 +102,7 @@ int main(){
             while(!q.empty()){
                 int f=q.front();
                 q.pop();
-                if(dis[m-1+50]!=-1){break;}
+                if(dis[m+49]!=-1){break;}
                 for(int i=0;i<e[f].size();i++){
                     edge g=e[f][i];
                     if(dis[g.to]==-1 && g.flow<g.cap){
@@ -111,7 +111,7 @@ int main(){
                     }
                 }
             }
-            if(dis[m-1+50]==-1){
+            if(dis[m+49]==-1){
                 break;
             }
             while(int f=dfs(0,1e9)){mf+=f;}
