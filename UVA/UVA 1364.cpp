@@ -62,7 +62,7 @@ void dfs(int idx,int p){
     }
 }
 
-bool iSP(int idx){
+bool iSB(int idx){
     int to;
     for(int i=0;i<e[idx].size();i++){
         to=e[idx][i];
@@ -72,16 +72,16 @@ bool iSP(int idx){
         }
         if(color[to]==-1){
             color[to]=1-color[idx];
-            if(!iSP(to)){
+            if(!iSB(to)){
                 return 0;
             }
         }
     }
     return 1;
 }
+
 int main(){
     while(scanf("%d%d",&n,&m)==2){
-        // cout<<n<<" "<<m<<endl;
         if(!n&&!m){
             break;
         }
@@ -127,7 +127,7 @@ int main(){
             if(idx==-1){continue;}
             memset(color,-1,sizeof(color));
             color[idx]=0;
-            if(!iSP(idx)){
+            if(!iSB(idx)){
                 for(int j=0;j<CYC[i].size();j++){
                     mark[CYC[i][j]]=1;
                 }
