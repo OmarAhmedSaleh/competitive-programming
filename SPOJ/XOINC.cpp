@@ -24,9 +24,9 @@
 
 using namespace std;
 
-int n ,a[2020];
-long long b[2020];
-pair<long long , int> dp[2][2022][2022];
+int n ,a[2001];
+int b[2001];
+pair<int , int> dp[2][2001][2001];
 int main(){
     scanf("%d",&n);
     for(int i=0;i<n;i++){
@@ -39,11 +39,11 @@ int main(){
     for(int i=n-1;i>-1;i--){
         for(int j=1;j<=n;j++){
         if(j + i -1 >=n){
-        long long qq=b[n-1];
+        int qq=b[n-1];
         if(i){qq-=b[i-1];}
             for(int r=0;r<2;r++){
                 dp[r][i][j]={qq,n-i};
-                if(j&&dp[r][i][j].first<dp[r][i][j-1].first){
+                if(dp[r][i][j].first<dp[r][i][j-1].first){
                     dp[r][i][j]=dp[r][i][j-1];
                 }
             }
@@ -52,7 +52,7 @@ int main(){
         int k = j;
         for(int r=0;r<2;r++){
             int jum=dp[r^1][i+k][min(2*k,n)].second;
-            long long qq=b[i+k-1];
+            int qq=b[i+k-1];
             if(i){
                 qq-=b[i-1];
             }
@@ -60,12 +60,12 @@ int main(){
                 dp[r][i][j].first=dp[r][i+k+jum][min(2*dp[r^1][i+k][min(2*k,n)].second,n)].first+qq;
                 dp[r][i][j].second=k;
             }
-            if(j&&dp[r][i][j].first<dp[r][i][j-1].first){
+            if(dp[r][i][j].first<dp[r][i][j-1].first){
                 dp[r][i][j]=dp[r][i][j-1];
             }
         }
     }
 }
-    printf("%lld\n",dp[0][0][2].first);
+    printf("%d\n",dp[0][0][2].first);
     return 0;
 }
