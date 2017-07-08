@@ -1,3 +1,7 @@
+/*
+A slight modification to the graph can reduce this problem into the minimum-cut problem,
+That is by splitting each vertex into two vertices and connect them with an edge with a removal cost equal to the vertex's removal cost.
+*/
 #include <cstring>
 #include <vector>
 #include <list>
