@@ -1,3 +1,9 @@
+/*
+   -if string that start at y[i] intersect with string at y[j] , at inter
+   -check if the longest common prefix of substring that start at inter and string y[i]  == s.size()-inter (the common part (suffix of y[i] and prefix of y[j] ))
+   -coverinterval from y[i] to y[i]+T.size()-1
+   -uncovered position : it may be any letter from 26 (samll)
+*/
 #include <cstring>
 #include <vector>
 #include <list>
