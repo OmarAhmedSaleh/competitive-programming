@@ -1,3 +1,12 @@
+/*
+    Note : A graph is bipartite if and only if it has no odd cycle.
+    steps:
+    1- find all cycle (large cycle may contain small cycle)
+    2- check if this cycle can be a Bipartite graph (if its length is even and has samll cycle if small cycle is odd (length)
+    then it divides large cycle into 2 odd cycles
+    )
+*/
+
 #include <cstring>
 #include <vector>
 #include <list>
