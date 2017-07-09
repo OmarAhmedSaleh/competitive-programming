@@ -1,3 +1,11 @@
+/*
+    - calculate all pair shortest path
+    - build new Graph (that Contains only shortest paths )
+    - for Nodes from 1 to N try to match (cover) it with one of its adjacent
+        ( if node A is covered by Node B ) it means that solders A and B will Walk together to Node (location) A
+    - ans = # of uncovered Node
+    
+*/
 #include <cstring>
 #include <vector>
 #include <list>
