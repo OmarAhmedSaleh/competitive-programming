@@ -1,3 +1,8 @@
+/*
+    - find the shortest path from 0 to 1 
+    - state idx,Rem_k        
+*/
+
 #include <cstring>
 #include <vector>
 #include <list>
