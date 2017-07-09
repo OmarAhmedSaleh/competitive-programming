@@ -1,3 +1,15 @@
+/*
+    -try all subset , calculate lower_bound and Upper_bound (interval)
+    - check if there is interval that is a sub-interval from other intervals (remove A)
+        interval A (LA,UA) is sub-interval of Interval B (LB,UB)
+           if(lA>=LB && UA<+UB)
+           LB-----------------------------UB
+                  LA-------------UA
+     -check if there is a common part (remove Common part from A)
+            LB--------------UB
+                    [LA-----] --------UA 
+                     Common
+*/
 #include <cstring>
 #include <vector>
 #include <list>
