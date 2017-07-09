@@ -1,3 +1,11 @@
+/*
+   - Sort Nodes According to DFS_Order
+   - count number of nodes in sub-tree for each Node
+   -to update sub_tree of node V , you need to update interval from DFS_Order[V] to DFS_Order[V]+Number_of_Nodes_Sub_tree[V]-1
+     use segment tree to perform Querey 
+
+*/
+
 #include <cstring>
 #include <vector>
 #include <list>
