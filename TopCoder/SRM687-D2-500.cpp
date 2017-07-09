@@ -1,3 +1,8 @@
+/*
+- try to construct max number of string = "quack" from String s
+- then check if there is a letter that don't belong to any "quack"'s
+*/
+
 #include <cstring>
 #include <vector>
 #include <list>
