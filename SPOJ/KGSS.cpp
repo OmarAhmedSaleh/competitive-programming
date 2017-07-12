@@ -39,7 +39,6 @@ void pull(node &aa,node&bb,node&c){
     c.b[0]=v.back();v.pop_back();c.b[1]=v.back();v.pop_back();
     c.mx=c.b[0]+c.b[1];
     return ;
-
 }
 void build(int idx,int l,int r){
     if(l==r){
@@ -50,7 +49,6 @@ void build(int idx,int l,int r){
     build(idx<<1,l,(l+r)/2);
     build((idx<<1)+1,(l+r)/2+1,r);
     pull(st[idx<<1],st[(idx<<1)+1],st[idx]);
-    
 }
 int x, y;
 void modify(int idx,int l,int r){
@@ -92,8 +90,7 @@ int main(){
     scanf("%d",&q);
     char c;
     while(q--){
-        cin>>c;
-        scanf("%d%d",&x,&y);
+        scanf(" %c%d%d",&c,&x,&y);
         x--;
         if(c=='U'){
             modify(1,0,n-1);
