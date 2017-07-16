@@ -27,7 +27,7 @@ using namespace std;
 //const int oo=1e9;
 //int dx[8]={1,-1,0,0,1,-1,1,-1};
 //int dy[8]={0,0,-1,1,1,-1,-1,1};
-int n , m, l[100010],r[100010],ty,x,y,rev;
+int n , m, l[100000],r[100000],ty,x,y,rev;
 void right(int xx,int yy){
     if(r[yy]==xx){return;}//right
     int lf_xx=l[xx],r_xx=r[xx],r_yy=r[yy];
