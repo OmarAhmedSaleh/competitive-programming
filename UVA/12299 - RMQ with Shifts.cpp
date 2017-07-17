@@ -29,7 +29,7 @@ const int oo=1e9;
 //int dy[8]={0,0,-1,1,1,-1,-1,1};
 const int MAX=100000<<2;
 
-int st[MAX],a[MAX];
+int st[MAX],a[100000];
 void pull(int &a,int &b,int &c){
     c=min(a,b);
 }
