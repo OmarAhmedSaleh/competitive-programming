@@ -26,8 +26,8 @@ using namespace std;
 //const long long OO=4e18;
 //const int oo=1e9;
 const int MAX=100000<<2;
-int dx[8]={1,-1,0,0,1,-1,1,-1};
-int dy[8]={0,0,-1,1,1,-1,-1,1};
+//int dx[8]={1,-1,0,0,1,-1,1,-1};
+//int dy[8]={0,0,-1,1,1,-1,-1,1};
 struct node{
     int x,sum,set_same;
     long long sum_sq;
@@ -119,7 +119,6 @@ int main(){
             if(ty==2){
                 printf("%lld\n",get(1,0,n-1));
                 continue;
-
             }
             if(!ty){
                 scanf("%d",&same);
