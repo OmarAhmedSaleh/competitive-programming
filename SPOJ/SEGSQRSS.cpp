@@ -37,15 +37,15 @@ struct node{
     }
 };
 node st[MAX];
-int a,s,e,v,ty,tc,n,m;
+int a,s,e,xx,same,ty,tc,n,m;
 void pull(node &a, node &b,node &c){
     c.sum=a.sum+b.sum;
     c.sum_sq=a.sum_sq+b.sum_sq;
 }
 void push(int &idx,int &l,int &r){
     if(st[idx].x!=0){
-        st[idx].sum_sq+=1LL*2*v*st[idx].sum;
-        st[idx].sum_sq+=1LL*v*v*(r-l+1);
+        st[idx].sum_sq+=1LL*2*st[idx].x*st[idx].sum;
+        st[idx].sum_sq+=1LL*st[idx].x*st[idx].x*(r-l+1);
     }
     if(st[idx].set_same!=1111){
         st[idx].sum=(r-l+1)*st[idx].set_same;
@@ -85,7 +85,7 @@ long long get(int idx,int l ,int r){
     }
     return get((idx<<1),l,(l+r)>>1)+get((idx<<1)+1,(l+r)/2+1,r);
 }
-void up1(int idx,int l,int r){
+void up(int idx,int l,int r){
     if(st[idx].x||st[idx].set_same!=1111){
         push(idx,l,r);
     }
@@ -93,30 +93,18 @@ void up1(int idx,int l,int r){
         return ;
     }
     if(l>=s&&r<=e){
-        st[idx].x+=v;
+        st[idx].x+=xx;
+        if(same!=1111){
+            st[idx].set_same=same;
+        }
         push(idx,l,r);
         return ;
     }
-    up1(idx<<1,l,(l+r)>>1);
-    up1((idx<<1)+1,(l+r)/2+1,r);
+    up(idx<<1,l,(l+r)>>1);
+    up((idx<<1)+1,(l+r)/2+1,r);
     pull(st[idx<<1],st[(idx<<1)+1],st[idx]);
 }
-void up2(int idx,int l,int r){
-    if(st[idx].x||st[idx].set_same!=1111){
-        push(idx,l,r);
-    }
-    if(l>e||r<s){
-        return ;
-    }
-    if(l>=s&&r<=e){
-        st[idx].set_same=v;
-        push(idx,l,r);
-        return ;
-    }
-    up2(idx<<1,l,(l+r)>>1);
-    up2((idx<<1)+1,(l+r)/2+1,r);
-    pull(st[idx<<1],st[(idx<<1)+1],st[idx]);
-}
+
 int main(){
     scanf("%d",&tc);
     for(int tt=1;tt<=tc;tt++){
@@ -124,20 +112,21 @@ int main(){
         scanf("%d%d",&n,&m);
         build(1,0,n-1);
         for(int i=0;i<m;i++){
+            xx=0;same=1111;
             scanf("%d%d%d",&ty,&s,&e);
             if(s>e){swap(s,e);}
             s--;e--;
-            if(ty!=2){
-                scanf("%d",&v);
-            }else{
+            if(ty==2){
                 printf("%lld\n",get(1,0,n-1));
                 continue;
+
             }
-            if(ty){
-                up1(1,0,n-1);
-                continue;
+            if(!ty){
+                scanf("%d",&same);
+            }else{
+                scanf("%d",&xx);
             }
-            up2(1,0,n-1);
+            up(1,0,n-1);
         }
     }
     return 0;
