@@ -1,3 +1,10 @@
+/*
+ First of all it is easy to see that if we fix l then have
+ max(from i=l, to r)ai - min(from i=l, to r) bi <= max(from i=l, to r+1)ai - min(from i=l, to r+1) bi
+ 
+ . So we can just use binary search to find the smallest index rmin and biggest index rmax that satisfy the equality and add rmax - rmin + 1 to our answer. To find the min and max values on a segment [l, r] we can use Range-Minimum Query data structure.
+ 
+ */
 #include <cstring>
 #include <vector>
 #include <list>
