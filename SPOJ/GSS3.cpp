@@ -3,6 +3,10 @@
  suf: the best sum you can obtain provided the subarray ends at the rightmost index in the interval.
  mx: The largest subarray sum you can have in an interval.
  sum: Sum of all elements in the interval.
+ 
+ 
+  https://www.quora.com/What-is-the-approach-for-solving-GSS1-and-GSS3-on-SPOJ-using-segment-trees
+ 
 
 */
 
