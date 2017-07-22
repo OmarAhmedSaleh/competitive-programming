@@ -1,3 +1,11 @@
+/*
+ pre: the best sum you can obtain provided the subarray starts from the leftmost index in the interval.
+ suf: the best sum you can obtain provided the subarray ends at the rightmost index in the interval.
+ mx: The largest subarray sum you can have in an interval.
+ sum: Sum of all elements in the interval.
+
+*/
+
 #include <cstring>
 #include <vector>
 #include <list>
