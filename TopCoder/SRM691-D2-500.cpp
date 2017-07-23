@@ -1,3 +1,7 @@
+/*
+more simple 
+    https://apps.topcoder.com/wiki/display/tc/SRM+691
+*/
 #include <cstring>
 #include <vector>
 #include <list>
