@@ -117,15 +117,11 @@ void get(){
                                 br=1;
                                 break;
                             }
-                        }
-                    }
-                    for(int kk=0;kk<4;kk++){
-                        for(int jj=kk+1;jj<4;jj++){
                             // 90 or 180
                             if(dot(make_pair(mx,my),v[kk],v[jj])!=0 && cross(make_pair(mx,my),v[kk],v[jj])!=0 ){
-                                    br=1;
-                                    break;
-                                    
+                                br=1;
+                                break;
+                                
                             }
                         }
                     }
