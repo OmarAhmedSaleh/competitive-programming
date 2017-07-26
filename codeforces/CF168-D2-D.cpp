@@ -42,12 +42,7 @@ double solve(int idx,int kk, int ll){
     if(seen[idx][kk][ll]){return memo[idx][kk][ll];}
     double prob=p[idx];prob/=100;
     double ans=solve(idx+1,kk,ll)*(1-prob);
-    if(a[idx]>0){
-        ans+=solve(idx+1,min(a[idx]+kk,200),ll+1)*prob;
-    }
-    if(a[idx]==-1&&kk){
-        ans+=solve(idx+1,kk-1,ll+1)*prob;
-    }
+    ans+=solve(idx+1,min(a[idx]+kk,200),ll+1)*prob;
     seen[idx][kk][ll]=1;
     return memo[idx][kk][ll]=ans;
 }
