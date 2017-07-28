@@ -14,7 +14,7 @@
 14-Computer Aided Diagnosis System based on Machine Learning Techniques for Lung Cancer 
 15-On the Combination of Wavelet and Curvelet for Feature Extraction to Classify Lung Cancer on Chest Radiographs 
 16- hya hya 7
-17-Computerized Detection of Lung Nodules by Means of ìVirtual Dual-Energyî Radiography 
+17-Computerized Detection of Lung Nodules by Means of ‚ÄúVirtual Dual-Energy‚Äù Radiography 
 18-A computer-aided diagnosis system for lung nodule detection in chest radiographs using a two-stage classification method based on radial gradient and template matching 
 19-LUNG CANCER DETECTION USING SUPERVISED CLASSIFICATION WITH CLUSTER VARIABILITY ON RADIOGRAPHS DATA
 20-Chest X-ray Features extraction for lung cancer classification
