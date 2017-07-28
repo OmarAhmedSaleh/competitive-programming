@@ -91,13 +91,11 @@ int main(){
             s=i;e=min(i+k,n-1);
             long long ret=get(1,0,n-1);
             if(i+k>=n){
-
                 int kk=k;
                 kk-=(n-1)-i;
                 kk--;
                 s=0;e=min(i,kk);
                 ret&=get(1,0,n-1);
-
             }
             e=i;s=max(i-k,0);
             ret&=get(1,0,n-1);
@@ -108,7 +106,6 @@ int main(){
                 e=n-1;s=max(n-1-kk,i);
                 ret&=get(1,0,n-1);
                // cout<<s<<" "<<e<<" "<<i<<endl;
-
             }
             if(i){cout<<" ";}
             cout<<ret;
