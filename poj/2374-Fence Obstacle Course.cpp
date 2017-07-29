@@ -29,7 +29,7 @@
             // cover
             seg[k]=j;
     }
- After connecting all segment try to get shortest path
+ After connecting all segments try to get shortest path
  */
 
 #include <cstring>
