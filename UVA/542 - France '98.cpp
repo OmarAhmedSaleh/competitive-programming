@@ -54,41 +54,35 @@ void get2(){
 }
 
 void get3(){
-    for(int i=0;i<4;i++){
-        for(int j=4;j<8;j++){
-            ans[i][2]+=ans[i][1]*(ans[j][1]*p[i][j]);
+    for(int k=0;k<9;k+=8){
+        for(int i=k;i<k+4;i++){
+            for(int j=k+4;j<k+8;j++){
+                ans[i][2]+=ans[j][1]*p[i][j];
+            }
+            ans[i][2]*=ans[i][1];
+        }
+        for(int i=k+4;i<k+8;i++){
+            for(int j=k;j<k+4;j++){
+                ans[i][2]+=ans[j][1]*p[i][j];
+            }
+            ans[i][2]*=ans[i][1];
         }
     }
-    for(int i=4;i<8;i++){
-        for(int j=0;j<4;j++){
-            ans[i][2]+=ans[i][1]*(ans[j][1]*p[i][j]);
-        }
-    }
-    for(int i=8;i<12;i++){
-        for(int j=12;j<16;j++){
-            ans[i][2]+=ans[i][1]*(ans[j][1]*p[i][j]);
-        }
-    }
-    for(int i=12;i<16;i++){
-        for(int j=8;j<12;j++){
-            ans[i][2]+=ans[i][1]*(ans[j][1]*p[i][j]);
-        }
-    }
-    
-    
 }
 
 void get4(){
-    for(int i=0;i<8;i++){
-        ans[i][3]=0;
-        for(int j=8;j<16;j++){
-        ans[i][3]+=ans[i][2]*ans[j][2]*p[i][j];
+    for(int k=0;k<16;k+=16){
+        for(int i=k;i<k+8;i++){
+            for(int j=k+8;j<k+16;j++){
+                ans[i][3]+=ans[j][2]*p[i][j];
+            }
+            ans[i][3]*=ans[i][2];
         }
-    }
-    for(int i=8;i<16;i++){
-       ans[i][3]=0;
-        for(int j=0;j<8;j++){
-            ans[i][3]+=ans[i][2]*ans[j][2]*p[i][j];
+        for(int i=k+8;i<k+16;i++){
+            for(int j=k;j<k+8;j++){
+                ans[i][3]+=ans[j][2]*p[i][j];
+            }
+            ans[i][3]*=ans[i][2];
         }
     }
 }
@@ -102,10 +96,7 @@ int main(){
             p[i][j]/=100;
         }
     }
-    get1();
-    get2();
-    get3();
-    get4();
+    get1();get2();get3();get4();
     for(int i=0;i<16;i++){
         printf("%-10s p=%.2lf%c\n",s[i].c_str(),ans[i][3]*100,'%');
     }
