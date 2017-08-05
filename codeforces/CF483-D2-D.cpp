@@ -1,3 +1,13 @@
+/*
+We will solve the task for every distinct bit.
+Now we must handle new constraint: l[i], r[i], q[i]. 
+If number q[i] has 1 in bit with number pos, then all numbers in segment [l[i], r[i]] will have 1 in that bit too. 
+To do that, we can use a standard idea of adding on a segment.
+Let's do two adding operation in s[pos] array — in position l[i] we will add 1, and in posiotion r[i] + 1 — -1.
+Then we will calculate partial sums of array s[pos], and if s[pos][i] > 0 (the sum on prefix length i + 1), then bit at position pos will be 1, otherwise — 0.
+After that, you can use segment tree to check satisfying constraints
+*/
+
 #include <cstring>
 #include <vector>
 #include <list>
