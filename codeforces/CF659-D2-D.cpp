@@ -1,3 +1,15 @@
+
+/*
+From the track description follows that Maria moves the way that the water always located to the right from her,
+so she could fall into the water only while turning left.
+To check if the turn is to the left, let's give every Maria's moves directions a number: moving to the north — 0, moving to the west — 1, to the south — 2 and to the east — 3.
+Then the turn is to the left if and only if the number of direction after performing a turn dir is equal to the number before performing a turn oldDir plus one modulo 4 .
+This solution has complexity O(n).
+One can solve this problem in alternative way. 
+Let the answer be equal to x (that means that the number of inner corners of 270 degrees equals x, but the number of inner corners of 90 degrees to n - x).
+As soon as the sum of the inner corners' values of polygon of n vertices is equal to 180 × (n - 2), then x × 270 + (n - x) × 90 equals to 180 × (n - 2). 
+This leads us to , being the answer for the problem calculated in O(1)
+*/
 #include <cstring>
 #include <vector>
 #include <list>
