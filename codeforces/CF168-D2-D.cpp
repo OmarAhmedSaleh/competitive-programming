@@ -1,3 +1,14 @@
+/*
+This problem can be solved using dynamic programming.
+Let d[i][j][m] — the probability we won j of first i days and get bags total capacity of m.
+For convenience, we assume that the bag is also a prize and the prize is a bag of capacity 0.
+To do that, retaining a task we must add 1 to all a[i].
+Then from d[i][j][m] we can go to the d[i+1][j+1][m+a[i]] with probability p[i]/100, and to d[i+1][j][m] with probability 1-p[i]/100. 
+The answer will be the sum of d[n+1][j][m] for all j,m such that L ≤ j ≤ m + k.
+This solution works for 200^4, and do not fit into the time limit.
+It remains to note that if we have over 200 places for prizes, it does not matter how many exactly. So we need to calculate states with m ≤ 200 and now solution works for 200^3.
+*/
+
 #include <cstring>
 #include <vector>
 #include <list>
