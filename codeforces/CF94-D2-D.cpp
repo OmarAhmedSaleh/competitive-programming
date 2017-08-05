@@ -1,3 +1,13 @@
+/*
+Greedy algorithm solves this problem.
+We should consecutively try to pour milk from each bottle into each available cup and in maximal possible amount.
+Also we always need to know, how much milk is in each bottle and each cup,
+for each cup - bottles from which we have poured milk, and for each bottle - cups into which we have poured milk.
+Writing it is not hard. But where is one special moment - if we compare real numbers, we must use EPS,
+or we can get WA on test 12 (50 1000 49). Some programs write NO on this test while answer is YES,
+because of wrong comparing of real numbers.
+*/
+
 #include <cstring>
 #include <vector>
 #include <list>
