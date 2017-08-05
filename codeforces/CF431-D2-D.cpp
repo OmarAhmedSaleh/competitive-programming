@@ -1,3 +1,6 @@
+/*
+http://codeforces.com/blog/entry/12369
+*/
 #include <cstring>
 #include <vector>
 #include <list>
