@@ -1,4 +1,8 @@
 /*
+ For each 4 points we want to see if we can rotate them with 90 degrees such that we obtain a square.
+ We can make a backtracking where we rotate each point 0, 1, 2 or 3 times and verify the figure obtained.
+ If it's a square we update the minimal solution. 
+ Since we can rotate each point 0, 1, 2 or 3 times, for each regiment we have 4^4 configurations to check.
  
  rotate a point counter clockwise 90 degrees
 
