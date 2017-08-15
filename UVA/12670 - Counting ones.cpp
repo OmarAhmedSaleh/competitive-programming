@@ -32,7 +32,7 @@ using namespace std;
 //const int MAX=100000<<2;
 //int dx[8]={1,-1,0,0,1,-1,1,-1};
 //int dy[8]={0,0,-1,1,1,-1,-1,1};
-long long a,b,memo[66][66][66][2];
+long long a,b,memo[55][55][55][2];
 vector<int> all[2];
 long long solve(int i , int j , int lv,int kk){
     if(kk<0){return 0;}
@@ -86,6 +86,5 @@ int main(){
         }
         printf("%lld\n",ans);
     }
-    
     return 0;
 }
