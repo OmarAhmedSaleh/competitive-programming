@@ -1,5 +1,4 @@
 /*
- CF844-D2-C
  */
 
 #include <cstring>
@@ -43,10 +42,8 @@ public:
             req--;
             int md=req%((int)all.size());
             //cout<<req<<" "<<all.size()<<" "<<md<<endl;
-            for(int i=0;i<md;i++){
-                cur++;
-                cur%=(int)all.size();
-            }
+            cur+=md;
+            cur%=(int)all.size();
             //cout<<cur<<endl;
             all.erase(all.begin()+cur);
             if(cur>=all.size()){cur=0;}
