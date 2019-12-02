@@ -1,35 +1,31 @@
 class Solution {
 public:
+    int rev_row(int level , int cur){
+            int start = 1 << (level);
+            int dif = cur - start;
+            int end = (1 << (level + 1)) - 1;
+        return end - dif;
+    }
     vector<int> pathInZigZagTree(int label) {
-        vector < vector < int > > tree;
-        int cur = 1;
-        int level = 0;
-        for(int i = 0 ; cur <= label && i < 22 ; i++){
-            int sz = 1 << i;
-            vector < int > v;
-            while((int)v.size() < sz){
-                v.push_back(cur);
-                if(cur == label){
-                    level = i;
-                }
-                cur++;
-            }
-            tree.push_back(v);
-        }
-        for(int i = 1 ;i <= level ; i += 2){
-            reverse(tree[i].begin() , tree[i].end());
-        }
         vector < int > ret;
-        int idx = 0;
-        for(int i = 0; i < (int)tree[level].size() ; i++){
-            if(tree[level][i] == label){
-                idx = i;
-            }
+        if(label == 1){
+            return {1};
         }
-        while(level > -1){
-            ret.push_back(tree[level][idx]);
+        int level = log2(label);
+        int cur = label;
+        ret.push_back(label);
+        if(level & 1 ){
+            cur = rev_row(level , cur);
+        }
+        while(level > 0){
+            int p = cur / 2;
+            int pp = p;
+            if(level % 2 == 0){
+                pp = rev_row(level - 1 , p);
+            }
             level--;
-            idx /= 2;
+            ret.push_back(pp);
+            cur = p;
         }
         reverse(ret.begin() , ret.end());
         return ret;
