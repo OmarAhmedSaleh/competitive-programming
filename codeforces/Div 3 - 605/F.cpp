@@ -6,17 +6,13 @@ using namespace std;
 const int N = 202;
 const int MAX_BAL = 444;
 const int oo = 1e9;
-int dp[N][N][MAX_BAL];
+int dp[N][N][MAX_BAL] , n , m;
 pair< pair < int , int > , pair < int , char > > parent[N][N][MAX_BAL];
-
-int main(){
-    ios::sync_with_stdio(false);
-	cin.tie(0);
-	cout.tie(0);
-    string s, t;
+string s, t;
+inline void readInput(){
     cin >> s >> t;
-    int n = (int)s.size();
-    int m = (int)t.size();
+     n = (int)s.size();
+     m = (int)t.size();
     for(int i = 0;i < N;i++){
       for(int j = 0;j < N;j++){
         for(int k = 0;k < MAX_BAL;k++){
@@ -24,9 +20,11 @@ int main(){
         }
       }
     }
+}
+inline void dynamicProgramming(){
+
     dp[0][0][0] = 0;
     parent[0][0][0] = {{-1 , -1} , {-1 , '('}};
-
     for(int i = 0;i <= n ;i++){
         for(int j = 0;j <= m ;j++){
             for(int bal = 0; bal < MAX_BAL ; bal++){
@@ -50,6 +48,14 @@ int main(){
             }
         }
     }
+}
+int main(){
+    ios::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
+    readInput();
+    dynamicProgramming();
+
     int b = 0;
     for(int i = 0;i < MAX_BAL ;i++){
         if(dp[n][m][i] != oo){
