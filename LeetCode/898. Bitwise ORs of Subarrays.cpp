@@ -10,12 +10,12 @@ public:
           }
         }
       }
-      unordered_map<long long, bool> allNumbers; 
+      unordered_set <long long> allNumbers; 
       for(int i = 0;i < n ; i++){
         long long currentNumber = A[i];
         bool found = true;
         while(found){
-          allNumbers[currentNumber] = true;
+          allNumbers.insert(currentNumber);
           found = false;
           int best = n + 1;
           for(int bit = 0; bit < 32; bit++){
@@ -37,10 +37,6 @@ public:
           }
          }
       }
-      int ans = 0;
-      for(auto key : allNumbers){
-        ans++;
-      }
-      return ans;
+      return (int)allNumbers.size();
     }
 };
