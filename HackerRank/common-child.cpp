@@ -21,12 +21,6 @@ int solve(string &s1 , string &s2 , int i , int j , vector < vector < int > > &m
 int commonChild(string s1, string s2) {
     vector < vector < int > > memo((int)s1.size() , vector < int > ((int)s2.size() , -1));
     return solve(s1 , s2 , 0 , 0 , memo);
- of a string .
-The second line contains a string  of length .
-
-Constraints
-
-
 }
 
 int main()
